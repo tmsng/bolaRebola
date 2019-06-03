@@ -14,13 +14,11 @@ import prof.jogos2D.util.DetectorColisoes;
 /**
  * Representa o buraco final
  */
-public class BuracoFinal {
+public class BuracoFinal extends ObstaculoDefault{
 
 	private Point2D.Double centro;
 	private double raio;
-	private Nivel nivel;
 	private Bola bolaCaptada;
-	private ComponenteVisual imagem;
 
 	/**
 	 * Cria o buraco final
@@ -29,7 +27,7 @@ public class BuracoFinal {
 	 * @param c componente visual que representa o buraco
 	 */
 	public BuracoFinal( Point2D.Double centro, double raio, ComponenteMultiAnimado c ){
-		imagem = c;
+		super.setImagem(c);
 		this.centro = centro;
 		this.raio = raio; 
 	}
@@ -62,7 +60,7 @@ public class BuracoFinal {
 	/** desenhar o buraco
 	 */
 	public void desenhar(Graphics2D g) {
-		imagem.desenhar(g);
+		super.getImagem().desenhar(g);
 		if( temBolaCaptada() ) {
 			// se em bola captada é preciso aplicar o efeito especial sobre a bola
 			// o efeito especial é mingar a bola
@@ -100,41 +98,13 @@ public class BuracoFinal {
 		this.raio = raio;
 	}
 
-	public Nivel getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(Nivel nivel) {
-		this.nivel = nivel;		
-	}
-
 	public boolean temBolaCaptada() {
 		return bolaCaptada != null;
 	}
 
 	private void captarBola(Bola bolaCaptada) {
 		this.bolaCaptada = bolaCaptada;
-		nivel.captarBola( this, Nivel.CAPTOR_BURACO );
+		super.getNivel().captarBola( this, Nivel.CAPTOR_BURACO );
 	}
 
-	private void libertarBola() {
-		this.bolaCaptada = null;
-		nivel.libertarBola( this );
-	}
-
-	public ComponenteVisual getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(ComponenteMultiAnimado img) {
-		this.imagem = img;
-	}
-
-	public Point getPosicaoImagem() {
-		return imagem.getPosicao();
-	}
-
-	public void setPosicaoImagem(Point p) {
-		imagem.setPosicao(p);
-	}
 }

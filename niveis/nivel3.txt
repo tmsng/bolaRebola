@@ -14,4 +14,5 @@ COLUNA	575	150	12	CS	562	137	imagens\coluna.png
 COLUNA	575	210	12	CS	562	197	imagens\coluna.png
 COLUNA	850	400	12	CS	837	387	imagens\coluna.png
 COLUNA	630	520	12	CS	617	507	imagens\coluna.png
+RETARDADOR	100	100	150	150	0.8	0.8	CMA	100	100	imagens\retardador_150_150.png	2	3	3
 TUNEL	630	580	25	140	180	CMA	605	555	imagens\tunel_in.png	2	4	3	CMA	115	155	imagens\tunel_out.png	2	4	3

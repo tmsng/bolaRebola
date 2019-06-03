@@ -15,13 +15,11 @@ import prof.jogos2D.util.Vector2D;
 /**
  * Representa o obstáculo Coluna
  */
-public class Coluna {
+public class Coluna extends ObstaculoDefault{
 	
 	private Point2D.Double centro;
 	private double raio;
-	private Nivel nivel;
 	private Bola bolaCaptada;
-	private ComponenteVisual imagem;
 
 	/** Cria uma coluna
 	 * @param centro centro da coluna
@@ -29,7 +27,7 @@ public class Coluna {
 	 * @param c imagem que representa a coluna
 	 */
 	public Coluna( Point2D.Double centro, double raio, ComponenteVisual c )  {
-		imagem = c;
+		super.setImagem(c);
 		this.centro = centro;
 		this.raio = raio; 
 	}
@@ -93,62 +91,5 @@ public class Coluna {
 	 */
 	public void setRaio(double raio) {
 		this.raio = raio;
-	}
-
-	/** devolve o nível onde a coluna está inserida
-	 * @return o nível onde a coluna está inserida
-	 */
-	public Nivel getNivel() {
-		return nivel;
-	}
-
-	/** define o nível onde a coluna está inserida
-	 * @param nivel o novel onde a coluna está inserida
-	 */
-	public void setNivel(Nivel nivel) {
-		this.nivel = nivel;		
-	}
-
-	/** testa se tem bola captada
-	 * @return true, se tem bola captada
-	 */
-	private boolean temBolaCaptada() {
-		return bolaCaptada != null;
-	}
-
-	/** capta a bola
-	 * @param bolaCaptada a bola a captar
-	 */
-	private void captarBola(Bola bolaCaptada) {
-		this.bolaCaptada = bolaCaptada;
-		nivel.captarBola( this, Nivel.CAPTOR_COLUNA );
-	}
-
-	/** liberta a bola
-	 */
-	private void libertarBola() {
-		this.bolaCaptada = null;
-		nivel.libertarBola( this );
-	}
-
-	/** devolve a imagem que representa a coluna
-	 * @return a imagem que representa a coluna
-	 */
-	public ComponenteVisual getImagem() {
-		return imagem;
-	}
-
-	/** define a imagem que representa a coluna
-	 * @param img a nova imagem
-	 */
-	public void setImagem(ComponenteMultiAnimado img) {
-		this.imagem = img;
-	}
-
-	/** desenha a coluna
-	 * @param g onde desenhar
-	 */
-	public void desenhar(Graphics2D g) {
-		imagem.desenhar(g);
 	}
 }

@@ -2,6 +2,7 @@
 imagens\fundo2.png
 98	640	12	imagens\bola2.png	5	4
 BURACO	880	650	25	CMA	855	625	imagens\buraco.png	2	4	5
+BURACO	720	215	25	CMA	695	190	imagens\buraco.png	2	4	5
 PAREDE	58	79	952	79	CS	0	0	imagens\vazio.png
 PAREDE	952	79	952	699	CS	0	0	imagens\vazio.png
 PAREDE	952	699	58	699	CS	0	0	imagens\vazio.png
@@ -10,7 +11,6 @@ PAREDE	58	699	58	79	CS	0	0	imagens\vazio.png
 PAREDE	131	252	131	700	CS	0	0	imagens\vazio.png
 PAREDE	150	252	131	252	CS	0	0	imagens\vazio.png
 PAREDE	150	700	150	252	CS	0	0	imagens\vazio.png
-CORACAO	875	90	30	CA	875	90	imagens\coracao.png	3	3
 
 PAREDE	450	430	150	430	CS	0	0	imagens\vazio.png
 PAREDE	150	445	460	445	CS	0	0	imagens\vazio.png
@@ -61,3 +61,11 @@ PAREDE	952	248	623	248	CS	0	0	imagens\vazio.png
 PAREDE	623	248	623	600	CS	0	0	imagens\vazio.png
 PAREDE	623	600	218	600	CS	0	0	imagens\vazio.png
 PAREDE	218	600	218	614	CS	0	0	imagens\vazio.png
+
+COLUNA	180	230	20	CS	160	210	imagens\col_verde.png	
+COLUNA	550	120	20	CS	530	100	imagens\col_verde.png
+COLUNA	650	215	20	CS	630	195	imagens\col_verde.png	
+RETENTOR	150	150	25	120	CMA	125	125	imagens\retentor.png	2	4	3
+RETENTOR	710	650	25	120	CMA	685	625	imagens\retentor.png	2	4	3
+RETENTOR	920	130	25	120	CMA	895	105	imagens\retentor.png	2	4	3
+

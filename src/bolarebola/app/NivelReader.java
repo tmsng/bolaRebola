@@ -20,6 +20,8 @@ import prof.jogos2D.image.ComponenteVisual;
  */
 public class NivelReader {
 	
+	private static int lvl;
+	
 	/**
 	 * método para ler o ficheiro de nível
 	 * @param level número do nivel
@@ -27,6 +29,8 @@ public class NivelReader {
 	 */
 	public static Nivel lerNivel( int level ){
 		String file = "niveis\\nivel" + level + ".txt";
+		
+		lvl = level;
 
 		try (BufferedReader fnivel = new BufferedReader( new FileReader( file ) );){
 			// ler o tempo que tem para acabar o nivel
@@ -69,6 +73,10 @@ public class NivelReader {
 					criarRetentor( novoNivel, info );
 				else if( info[ 0 ].equals("TERMINATOR" ))
 					criarTerminator( novoNivel, info );
+				else if( info[ 0 ].equals("CORACAO" ))
+					criarVidaExtra( novoNivel, info );
+				else if( info[ 0 ].equals("RETARDADOR" ))
+					criarRetardador( novoNivel, info );
 				linha = fnivel.readLine();
 			}			
 			return novoNivel;
@@ -80,9 +88,12 @@ public class NivelReader {
 			return null;
 		}		
 	}
+	
+	
+	//------------------------------------------------------------------------------------------------------------ Buraco <
 
-	/** lê a info e cria um buraco final,
-	 * Na linha a info é <br>
+	/** Buraco Final
+	 * 
 	 * BURACO	pos x + pos y + raio + <info imagem>
 	 */
 	private static void criarBuraco(Nivel novoNivel, String[] info) throws IOException {
@@ -92,9 +103,11 @@ public class NivelReader {
 		novoNivel.setBuraco( new BuracoFinal( centro, raio , burImg ) );
 	}
 	
+	//------------------------------------------------------------------------------------------------------------ Parede <
+	
 	/** 
-	 * le a info e cria uma parede.
-	 * Na linha a info é <br>
+	 * Parede
+	 * 
 	 * PAREDE ini x + ini y + fim x + fim y + <info imagem>
 	 */
 	private static void criarParede(Nivel novoNivel, String[] info) throws IOException {
@@ -105,9 +118,11 @@ public class NivelReader {
 		novoNivel.addParede( p );
 	}
 
+	//------------------------------------------------------------------------------------------------------------ Coluna <
+	
 	/** 
-	 * le a info e cria uma coluna
-	 * Na linha a info é <br>
+	 * Coluna
+	 * 
 	 * COLUNA	centro x + centro x + raio + <info imagem>
 	 */
 	private static void criarColuna(Nivel novoNivel, String[] info) throws IOException {
@@ -115,12 +130,14 @@ public class NivelReader {
 		int raio = Integer.parseInt( info[3] );
 		ComponenteVisual cv = lerComponenteVisual( info, 4 );
 		Coluna c = new Coluna( centro, raio, cv );
-		novoNivel.addColuna( c );				
+		novoNivel.addColuna( c );
 	}
+	
+	//------------------------------------------------------------------------------------------------------------ Esteira <
 
 	/** 
-	 * le a info e cria uma esteira
-	 * Na linha a info é <br>
+	 * Esteira
+	 * 
 	 * ESTEIRA ini x + ini y + fim x + fim y + incrementoVeloc X + incrementoVeloc Y + <info imagem>
 	 */
 	private static void criarEsteira(Nivel novoNivel, String[] info) throws IOException {
@@ -130,12 +147,19 @@ public class NivelReader {
 		double fx = Double.parseDouble( info[5] );
 		double fy = Double.parseDouble( info[6] );
 		ComponenteVisual cv = lerComponenteVisual( info, 7 );
-		// criar a esteira e adicionar ao nível				
+		if(lvl == 4) {
+			cv.rodar(4.71);
+		}
+		
+		Esteira e = new Esteira(ini, comp, alt, fx, fy, cv);
+		novoNivel.addEsteira(e);
 	}
 	
+	//------------------------------------------------------------------------------------------------------------ Tunel <
+	
 	/** 
-	 * le a info e cria um túnel
-	 * Na linha a info é <br>
+	 * Tunel
+	 * 
 	 * TUNEL centro in x + centro in y + raio in + centro out x + centro out y + <info imagem in > + <info imagem out>
 	 */
 	private static void criarTunel(Nivel novoNivel, String[] info) throws IOException {
@@ -144,24 +168,34 @@ public class NivelReader {
 		Point2D.Double centroOut = lerPosicaoPrecisa( info[4], info[5] );
 		ComponenteVisual cvIn = lerComponenteVisual( info, 6 );
 		ComponenteVisual cvOut = lerComponenteVisual( info, 13 );
-		// criar o túnel e adicionar ao nível
+
+		TunelIn t_in = new TunelIn(centroIn, raio, cvIn);
+		TunelOut t_out = new TunelOut(centroOut, cvOut);
+		novoNivel.addTunelIn(t_in);
+		novoNivel.addTunelOut(t_out);
 	}
+	
+	//------------------------------------------------------------------------------------------------------------ Atrator <
 
 	/** 
-	 * le a info e cria um atrator
-	 * Na linha a info é <br>
+	 * Atrator
+	 * 
 	 * ATRATOR	pos x + pos	y + fator atração + <info imagem>
 	 */
 	private static void criarAtrator(Nivel novoNivel, String[] info) throws IOException {
 		Point2D.Double pos = lerPosicaoPrecisa( info[1], info[2] );
 		double g = Double.parseDouble( info[3] );
 		ComponenteVisual cv = lerComponenteVisual( info, 4 );
-		// criar o atrator e adicionar ao nível				
+
+		Atrator a = new Atrator( pos, g, cv );
+		novoNivel.addAtrator(a);	
 	}
 	
+	//------------------------------------------------------------------------------------------------------------ Retentor <
+	
 	/** 
-	 * le a info e cria um retentor
-	 * Na linha a info é <br>
+	 * Retentor
+	 * 
 	 * RETENTOR	pos x + pos	y + raio + nº ciclos de retenção + <info imagem>
 	 */
 	private static void criarRetentor(Nivel novoNivel, String[] info) throws IOException {
@@ -169,20 +203,62 @@ public class NivelReader {
 		int raio = Integer.parseInt( info[3] );
 		int ciclos = Integer.parseInt( info[4] );
 		ComponenteVisual cv = lerComponenteVisual( info, 5 );
-		// criar o retentor e adicionar ao nível				
+	
+		Retentor r = new Retentor(centro, raio, ciclos, cv);
+		novoNivel.addRetentor(r);
 	}
+	
+	//------------------------------------------------------------------------------------------------------------ Terminador <
 
 	/** 
-	 * le a info e cria um terminator
-	 * Na linha a info é <br>
+	 * Terminator
+	 * 
 	 * TERMINATOR centro x + centro y + raio + <info imagem>
 	 */
 	private static void criarTerminator(Nivel novoNivel, String[] info) throws IOException {
 		Point2D.Double centro = lerPosicaoPrecisa( info[1], info[2] );
 		int raio = Integer.parseInt( info[3] );
 		ComponenteVisual cv = lerComponenteVisual( info, 4 );
-		// criar o terminator e adicionar ao nível				
+	
+		Terminador t = new Terminador(centro, raio, cv);
+		novoNivel.addTerminator(t);
 	}
+	
+	//------------------------------------------------------------------------------------------------------------ VidaExtra <
+	
+	/** 
+	 * VidaExtra
+	 * 
+	 * VIDAEXTRA centro x + centro y + raio + <info imagem>
+	 */
+	private static void criarVidaExtra(Nivel novoNivel, String[] info) throws IOException {
+		Point2D.Double centro = lerPosicaoPrecisa( info[1], info[2] );
+		int raio = Integer.parseInt( info[3] );
+		ComponenteVisual cv = lerComponenteVisual( info, 4 );
+		
+		VidaExtra vext = new VidaExtra(centro, raio, cv);
+		novoNivel.addVidaExtra(vext);
+	}
+	
+	//------------------------------------------------------------------------------------------------------------ Retardador <
+	
+	/** 
+	 * Retardador
+	 * 
+	 * RETARDADOR centro x + centro y + incrementoVel_x + incrementoVel_y + <info imagem>
+	 */
+	private static void criarRetardador(Nivel novoNivel, String[] info) throws IOException {
+		Point2D.Double ini = lerPosicaoPrecisa( info[1], info[2] );
+		int comp = Integer.parseInt( info[3] );
+		int alt = Integer.parseInt( info[4] );
+		double fx = Double.parseDouble( info[5] );
+		double fy = Double.parseDouble( info[6] );
+		ComponenteVisual cv = lerComponenteVisual( info, 7 );
+		
+		Retardador retd = new Retardador(ini, comp, alt, fx, fy, cv);
+		novoNivel.addRetardador(retd);
+	}
+	
 
 	/** leitura de um componente visual
 	 * @param info informação da linha

@@ -20,7 +20,7 @@ import prof.jogos2D.util.Vector2D;
  * Para impedir as bolas que vêm de cima, teria-se de usar
  * os pontos (200,100) -> (100,100).
  */
-public class Parede {
+public class Parede extends ObstaculoDefault{
 	
 	private Point2D.Double inicio, fim;
 	
@@ -29,16 +29,14 @@ public class Parede {
 	// um vetor perpendicular à linha para calcular o ângulo de 
 	// rebate da bola
 	private Vector2D dir, normal;  // direção da linha e normal
-	private Nivel nivel;
-	private ComponenteVisual imagem;
-	
+
 	/** Constroi uma parede
 	 * @param ini inicio da linha
 	 * @param fim fim da linha
 	 * @param c aspeto visual da parede
 	 */
 	public Parede( Point2D.Double ini, Point2D.Double fim, ComponenteVisual c)  {
-		imagem = c;
+		super.setImagem(c);
 		inicio = ini;
 		this.fim = fim;
 		dir = new Vector2D( fim.x - ini.x, fim.y - ini.y);
@@ -101,36 +99,5 @@ public class Parede {
 		
 		b.setPosicaoCentro( new Point2D.Double(  choque.x + refletido.x, choque.y + refletido.y ));
 		b.setVelocidade( refletido.x,  refletido.y );
-	}
-	
-	/**
-	 * desenhar a parede
-	 */
-	public void desenhar(Graphics2D g) {
-		imagem.desenhar(g);
-	}
-
-	public Nivel getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(Nivel nivel) {
-		this.nivel = nivel;		
-	}
-
-	public ComponenteVisual getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(ComponenteMultiAnimado img) {
-		this.imagem = img;
-	}
-
-	public Point getPosicaoImagem() {
-		return imagem.getPosicao();
-	}
-
-	public void setPosicaoImagem(Point p) {
-		imagem.setPosicao(p);
 	}
 }

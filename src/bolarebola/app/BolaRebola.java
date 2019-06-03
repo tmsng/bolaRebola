@@ -23,23 +23,35 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class BolaRebola extends JFrame {
-	// Apenas para n„o dar warnings
+	// Apenas para n√£o dar warnings
 	private static final long serialVersionUID = 1L;
 	
 	// zona de jogo
 	private JPanel zonaJogo;
 	
-	// Controlo do nÌvel
+	// Controlo do n√≠vel
 	private Nivel nivel;
 	private int nivelAtual = 1;
 	private Timer temporizador;
 	
-	// criaÁ„o do teclado
+	// Controlo da vida
+	private static int vida = 5;
+	
+	// cria√ß√£o do teclado
 	private SKeyboard keyboard = new SKeyboard( );
 	
-	// elementos de interface do tempo, nÌvel e vidas
+	// elementos de interface do tempo, n√≠vel e vidas
 	private final Font fonteTempo = new Font("Arial", Font.BOLD, 40 );
-	private final Color corTempo = new Color( 50, 230, 50 );
+	private final Color corTempoMais10 = new Color( 50, 230, 50 );
+	private final Color corTempoMenos10 = new Color( 250, 250, 0 );
+	private final Color corTempoPerdeu = new Color( 250, 0, 0 );
+	
+	private final Font fonteNivel = new Font("Arial", Font.BOLD, 40 );
+	private final Color corNivel = new Color( 250, 250, 250);
+	
+	private final Font fonteVidas = new Font("Arial", Font.BOLD, 40 );
+	private final Color corVidas = new Color( 250, 0, 0);
+	
 
 	// teclas para controlar a bola
 	private static int SUBIR = KeyEvent.VK_Q;
@@ -55,7 +67,7 @@ public class BolaRebola extends JFrame {
 		initialize();
 	}
 
-	/** iniciar a parte gr·fica
+	/** iniciar a parte gr√°fica
 	 */
 	private void initialize() {
 		this.setSize(300, 200);
@@ -64,10 +76,10 @@ public class BolaRebola extends JFrame {
 		this.setTitle("Bola Rebola");
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		
-		// vai comeÁar por ler o nivel atual
+		// vai come√ßar por ler o nivel atual
 		nivel = NivelReader.lerNivel( nivelAtual );
 
-		// iniciar a execuÁ„o do mÈtodo que vai mandar redesenhar
+		// iniciar a execu√ß√£o do m√©todo que vai mandar redesenhar
 		temporizador = new Timer( 33, new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				atualizar();		
@@ -77,19 +89,19 @@ public class BolaRebola extends JFrame {
 	}
 
 	/**
-	 * mÈtodo que comeÁa a jogar o nÌvel
+	 * m√©todo que come√ßa a jogar o n√≠vel
 	 */
 	private void comecarNivel(){
 		nivel.comecar();
 	}
 
 	/**
-	 * mÈtodo que processa os eventos do jogo e actualiza o nÌvel
+	 * m√©todo que processa os eventos do jogo e actualiza o n√≠vel
 	 */
 	private void atualizar(){
-		// se n„o est· a jogar n„o tem de actualizar nada
+		// se n√£o est√° a jogar n√£o tem de actualizar nada
 		if( !nivel.estaJogar() ) {
-			// se n„o est· a jogar e se carrega numa tecla, comeÁa a jogar
+			// se n√£o est√° a jogar e se carrega numa tecla, come√ßa a jogar
 			if( keyboard.estaPremida( SUBIR ) || keyboard.estaPremida( DESCER ) ||
 				keyboard.estaPremida( ESQUERDA ) || keyboard.estaPremida( DIREITA )	)
  				comecarNivel();
@@ -118,26 +130,59 @@ public class BolaRebola extends JFrame {
 
 		nivel.atualizar(); // atualizar o nivel
 				
-		testarFim();  // ver se j· acabou o jogo
+		testarFim();  // ver se j√° acabou o jogo
 		
 		// mandar desenhar todos elementos do jogo
 		zonaJogo.repaint();
 	}
 
+	public static void addVida() {
+		vida += 1;
+	}
+	
 	/** desenha todos os elementos do jogo
-	 * @param g ambiente gr·fico onde desenhar
+	 * @param g ambiente gr√°fico onde desenhar
 	 */
 	private void desenharJogo(Graphics2D g) {
 		nivel.desenhar( g );
+		Color c = corTempoMais10;
 
-		// desenhar o n˙mero do nÌvel
+		// desenhar o n√∫mero do n√≠vel
+		g.setFont(fonteNivel);
+		g.setColor(corNivel);
+		g.drawString( "Nivel: " + nivelAtual, 820, 50 );
 		
-		// desenhar o n˙mero de tentativas
+		// desenhar o n√∫mero de tentativas
+		g.setFont(fonteVidas);
+		g.setColor(corVidas);
+		
+		switch (vida) {
+		case 7: g.drawString( "‚ô• ‚ô• ‚ô• ‚ô• ‚ô• ‚ô• ‚ô•" , 365, 50 );
+			break;
+		case 6: g.drawString( "‚ô• ‚ô• ‚ô• ‚ô• ‚ô• ‚ô•" , 385, 50 );
+			break;
+		case 5: g.drawString( "‚ô• ‚ô• ‚ô• ‚ô• ‚ô•" , 405, 50 );
+			break;
+		case 4: g.drawString( "‚ô• ‚ô• ‚ô• ‚ô•" , 425, 50 );
+			break;
+		case 3: g.drawString( "‚ô• ‚ô• ‚ô•" , 445, 50 );
+			break;
+		case 2: g.drawString( "‚ô• ‚ô•" , 465, 50 );
+			break;
+		case 1: g.drawString( "‚ô•" , 485, 50 );
+			break;
+		}
 		
 		// desenhar o tempo que falta
 		g.setFont( fonteTempo );
-		g.setColor( corTempo );
-		g.drawString( "" + nivel.getTempoAtual(), 50, 40 );
+		if(nivel.getTempoAtual() <= 10 && nivel.getTempoAtual() > 0){
+			c = corTempoMenos10;
+		}
+		else if(nivel.getTempoAtual() <= 0){
+			c = corTempoPerdeu;
+		}
+		g.setColor( c );
+		g.drawString( "" + nivel.getTempoAtual(), 50, 50 );
 	}		
 
 	/** 
@@ -148,29 +193,39 @@ public class BolaRebola extends JFrame {
 			return;
 		
 		if( nivel.ganhou() ) {
-			JOptionPane.showMessageDialog( this, "Passou de nÌvel!!!");
+			JOptionPane.showMessageDialog( this, "Passou de n√≠vel!!!");
 
 			// passar para o nivel seguinte
 			nivelAtual++;
 			
-			// se j· acabaram os nÌveis volta ao primeiro
+			// se j√° acabaram os n√≠veis volta ao primeiro
 			if( !existeNivel(nivelAtual) ) {
 				JOptionPane.showMessageDialog( this, "JOGO VENCIDO!!! Vamos reiniciar!");
 				nivelAtual = 1;
 			}
 		}
 		else {
-			JOptionPane.showMessageDialog( this, "PERDEU!!!");
+			vida -= 1;
+			
+			//se perdeu as vidas todas
+			if(vida == 0){
+				JOptionPane.showMessageDialog( this, "FICOU SEM VIDAS!!! Vamos reiniciar!");
+				nivelAtual = 1;
+				vida = 5;
+			}
+			else {
+				JOptionPane.showMessageDialog( this, "PERDEU!!!");
+			}
 		}
 		
-		// ler o novo nÌvel (ou o mesmo se perdeu)
+		// ler o novo n√≠vel (ou o mesmo se perdeu)
 		nivel = NivelReader.lerNivel( nivelAtual );
 	}
 
 	/**
-	 * verifica se o nÌvel indicado existe
-	 * @param level o n˙mero do nÌvel a verificar
-	 * @return true se o nÌvel existe
+	 * verifica se o n√≠vel indicado existe
+	 * @param level o n√∫mero do n√≠vel a verificar
+	 * @return true se o n√≠vel existe
 	 */
 	private boolean existeNivel(int level ) {
 		String fileName = "niveis\\nivel" + level + ".txt";
@@ -178,7 +233,7 @@ public class BolaRebola extends JFrame {
 		return f.exists();
 	}
 
-	/**** MÈtodos auuxiliares de contruÁ„o da interface gr·fica
+	/**** M√©todos auuxiliares de contru√ß√£o da interface gr√°fica
 	 */
 	/**
 	 * This method initializes jContentPane

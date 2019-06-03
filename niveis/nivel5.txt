@@ -17,7 +17,7 @@ COLUNA	860	300	12	CS	847	287	imagens\coluna.png
 COLUNA	800	385	12	CS	787	372	imagens\coluna.png
 COLUNA	730	520	12	CS	717	507	imagens\coluna.png
 COLUNA	680	580	12	CS	667	567	imagens\coluna.png
-ATRATOR	250	680	5	CA	230	660	imagens\iman.png	3	3
+ATRATOR	250	680	5	CA	230	625	imagens\iman.png	3	3
 TUNEL	250	580	25	140	180	CMA	230	560	imagens\tunel_in.png	2	4	3	CMA	115	155	imagens\tunel_out.png	2	4	3
 COLUNA	200	500	12	CS	180	480	imagens\coluna.png
 COLUNA	340	510	12	CS	320	490	imagens\coluna.png
