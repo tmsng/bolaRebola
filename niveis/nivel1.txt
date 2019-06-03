@@ -1,0 +1,15 @@
+25
+imagens\fundo1.jpg
+200	200	12	imagens\bola2.png	5	4
+BURACO	150	550	25	CMA	125	525	imagens\buraco.png	2	4	5
+PAREDE	100	100	912	100	CS	85	85	imagens\parede_1_1.png
+PAREDE	775	250	100	251	CS	85	250	imagens\parede_1_2.png
+PAREDE	100	250	100	100	CS	85	100	imagens\parede_1_3.png
+PAREDE	912	100	912	611	CS	912	100	imagens\parede_1_8.png
+PAREDE	912	611	100	611	CS	85	611	imagens\parede_1_5.png
+PAREDE	100	611	100	460	CS	85	460	imagens\parede_1_6.png
+PAREDE	100	460	775	460	CS	85	445	imagens\parede_1_4.png
+PAREDE	775	460	775	251	CS	760	265	imagens\parede_1_7.png
+COLUNA	575	175	12	CS	562	162	imagens\coluna.png
+COLUNA	850	400	12	CS	837	387	imagens\coluna.png
+COLUNA	630	550	12	CS	617	537	imagens\coluna.png

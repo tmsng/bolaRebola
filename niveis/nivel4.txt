@@ -1,0 +1,21 @@
+18
+imagens\fundo1.jpg
+200	200	12	imagens\bola2.png	5	4
+BURACO	150	550	25	CMA	125	525	imagens\buraco.png	2	4	5
+PAREDE	100	100	912	100	CS	85	85	imagens\parede_1_1.png
+PAREDE	775	250	100	251	CS	85	250	imagens\parede_1_2.png
+PAREDE	100	250	100	100	CS	85	100	imagens\parede_1_3.png
+PAREDE	912	100	912	611	CS	912	100	imagens\parede_1_8.png
+PAREDE	912	611	100	611	CS	85	611	imagens\parede_1_5.png
+PAREDE	100	611	100	460	CS	85	460	imagens\parede_1_6.png
+PAREDE	100	460	775	460	CS	85	445	imagens\parede_1_4.png
+PAREDE	775	460	775	251	CS	760	265	imagens\parede_1_7.png
+ESTEIRA	790	400	100	100	0	0.6	CA	765	375	imagens\esteira_100_100.png	3	5
+TERMINATOR	840	565	40	CA	800	525	imagens\terminator.png	2	5
+COLUNA	375	210	12	CS	362	197	imagens\coluna.png
+COLUNA	525	150	12	CS	512	137	imagens\coluna.png
+COLUNA	675	210	12	CS	662	197	imagens\coluna.png
+COLUNA	860	300	12	CS	847	287	imagens\coluna.png
+COLUNA	800	385	12	CS	787	372	imagens\coluna.png
+COLUNA	730	520	12	CS	717	507	imagens\coluna.png
+COLUNA	680	580	12	CS	667	567	imagens\coluna.png

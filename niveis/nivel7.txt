@@ -1,0 +1,68 @@
+30
+imagens\fundo2.png
+98	640	12	imagens\bola2.png	5	4
+BURACO	880	650	25	CMA	855	625	imagens\buraco.png	2	4	5
+BURACO	910	170	25	CMA	885	145	imagens\buraco.png	2	4	5
+PAREDE	58	79	952	79	CS	0	0	imagens\vazio.png
+PAREDE	952	79	952	699	CS	0	0	imagens\vazio.png
+PAREDE	952	699	58	699	CS	0	0	imagens\vazio.png
+PAREDE	58	699	58	79	CS	0	0	imagens\vazio.png
+
+PAREDE	131	252	131	700	CS	0	0	imagens\vazio.png
+PAREDE	150	252	131	252	CS	0	0	imagens\vazio.png
+PAREDE	150	700	150	252	CS	0	0	imagens\vazio.png
+
+PAREDE	450	430	150	430	CS	0	0	imagens\vazio.png
+PAREDE	150	445	460	445	CS	0	0	imagens\vazio.png
+PAREDE	460	445	460	247	CS	0	0	imagens\vazio.png
+PAREDE	460	247	298	247	CS	0	0	imagens\vazio.png
+PAREDE	298	247	298	266	CS	0	0	imagens\vazio.png
+PAREDE	298	266	445	266	CS	0	0	imagens\vazio.png
+PAREDE	445	266	445	430	CS	0	0	imagens\vazio.png
+
+PAREDE	215	345	385	345	CS	0	0	imagens\vazio.png
+PAREDE	385	345	385	330	CS	0	0	imagens\vazio.png
+PAREDE	385	330	235	330	CS	0	0	imagens\vazio.png
+PAREDE	235	330	235	180	CS	0	0	imagens\vazio.png
+PAREDE	235	180	460	180	CS	0	0	imagens\vazio.png
+PAREDE	460	180	460	160	CS	0	0	imagens\vazio.png
+PAREDE	460	160	215	160	CS	0	0	imagens\vazio.png
+PAREDE	215	160	215	345	CS	0	0	imagens\vazio.png
+
+PAREDE	798	699	798	432	CS	0	0	imagens\vazio.png
+PAREDE	798	432	779	432	CS	0	0	imagens\vazio.png
+PAREDE	779	432	779	699	CS	0	0	imagens\vazio.png
+
+PAREDE	218	530	555	530	CS	0	0	imagens\vazio.png
+PAREDE	555	530	555	160	CS	0	0	imagens\vazio.png
+PAREDE	555	160	540	160	CS	0	0	imagens\vazio.png
+PAREDE	540	160	540	515	CS	0	0	imagens\vazio.png
+PAREDE	540	515	218	515	CS	0	0	imagens\vazio.png
+PAREDE	218	515	218	530	CS	0	0	imagens\vazio.png
+
+PAREDE	625	178	870	178	CS	0	0	imagens\vazio.png
+PAREDE	870	178	870	160	CS	0	0	imagens\vazio.png
+PAREDE	870	160	625	160	CS	0	0	imagens\vazio.png
+PAREDE	625	160	625	178	CS	0	0	imagens\vazio.png
+
+PAREDE	700	608	716	608	CS	0	0	imagens\vazio.png
+PAREDE	716	608	716	352	CS	0	0	imagens\vazio.png
+PAREDE	716	352	852	352	CS	0	0	imagens\vazio.png
+PAREDE	852	352	852	525	CS	0	0	imagens\vazio.png
+PAREDE	852	525	870	525	CS	0	0	imagens\vazio.png
+PAREDE	870	525	870	336	CS	0	0	imagens\vazio.png
+PAREDE	870	336	700	336	CS	0	0	imagens\vazio.png
+PAREDE	700	336	700	608	CS	0	0	imagens\vazio.png
+
+PAREDE	218	614	637	614	CS	0	0	imagens\vazio.png
+PAREDE	637	614	637	266	CS	0	0	imagens\vazio.png
+PAREDE	637	266	952	266	CS	0	0	imagens\vazio.png
+PAREDE	952	248	623	248	CS	0	0	imagens\vazio.png
+PAREDE	623	248	623	600	CS	0	0	imagens\vazio.png
+PAREDE	623	600	218	600	CS	0	0	imagens\vazio.png
+PAREDE	218	600	218	614	CS	0	0	imagens\vazio.png
+
+PAREDE	50	200	200	50	CS	50	50	imagens\parede_esquina.png
+COLUNA	225	122	20	CS	205	102	imagens\col_verde.png	
+COLUNA	500	170	20	CS	480	150	imagens\col_verde.png	
+
